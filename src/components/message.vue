@@ -1,6 +1,12 @@
 <template>
   <div class="content">
-    <textarea class="text" v-model="text" name="comentarios" rows="10" cols="40">
+    <textarea
+      class="text"
+      v-model="text"
+      name="comentarios"
+      rows="10"
+      cols="40"
+    >
 Escribe aquí tu mensaje</textarea
     >
     <br />
@@ -18,29 +24,27 @@ import axios from "axios";
 export default {
   data: () => ({
     result: null,
-    text:null,
+    text: null,
   }),
   async created() {
-    let response = await axios.post(
-      "http://ec2-3-129-245-136.us-east-2.compute.amazonaws.com:3000/write"
-    );
+    let response = await axios.post("http://localhost:3000/write");
     this.result = response.data;
   },
-  methods:{
+  methods: {
     async enviar(data) {
-    if(data !=null){
-      let response = await axios.post(
-        "http://ec2-3-129-245-136.us-east-2.compute.amazonaws.com:3000/write", {"message":data}
-      );
-      this.result = response.data;
-    }
-    }
-  }
+      if (data != null) {
+        let response = await axios.post("http://localhost:3000/write", {
+          message: data,
+        });
+        this.result = response.data;
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.mensajes{
+.mensajes {
   margin-top: 50px;
 }
 textarea.text {
